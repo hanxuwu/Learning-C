@@ -7,3 +7,6 @@
 * add Haobin's code
 * add problem set
 * add algorithm in c
+
+##8/1/2018 create Sort in Lecture
+* add the Sort in Lecture
