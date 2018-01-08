@@ -1,0 +1,29 @@
+2 (Hamiltian/Euler Paths and circuits)
+
+a.GRAPH 1
+
+    Euler Paths:  0-1-2     Hamiltian Path： 0-1-2     Euler Circuits：   no     Hamiltian Circuits：   no
+    
+  GRAPH 2
+
+    Euler Paths:  0-1-2-0     Hamiltian Path： 0-1-2     Euler Circuits：  0-1-2-0      Hamiltian Circuits： 0-1-2-0
+
+  GRAPH 3
+
+    Euler Paths:   no    Hamiltian Path： no     Euler Circuits：  no      Hamiltian Circuits：    no  
+
+  GRAPH 4
+
+    Euler Paths:   no    Hamiltian Path： 0-1-2-3     Euler Circuits：  no     Hamiltian Circuits：  0-1-2-3-0
+
+
+
+
+    Euler Circuits: need connected and all vertices have even degree;
+
+    Non-Circuitous Euler Path : connected and exactly 2 vertices have odd degree;
+
+b.
+An Euler path: 2-6-5-2-3-0-1-5-0-4-5
+
+No Euler Circuits since two vertices (2 & 5) have odd degree
