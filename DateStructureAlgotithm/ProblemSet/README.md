@@ -13,3 +13,7 @@ week03-1 (Graph fundamentals)
 
 week03-2 (Graph representations)  
 
+week03-3 (Storage costs)
+
+week02-2 (Counting primitive operation)   
+

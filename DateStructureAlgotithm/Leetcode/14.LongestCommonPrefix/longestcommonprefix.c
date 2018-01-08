@@ -1,23 +1,23 @@
 # include <stdio.h>
 
-char* longestCommonPrefix(char** strs, int strsSize) {
-    int i;
-    int max=0;
-    char temp;
-    char *result = strs[0];
-    if (strsSize==0) return "";
-    while(1){
-    for(i=0;i<strsSize;i++){
-        temp=strs[0][max];
-        if(strs[i][max]!=temp) 
-            {result[max]=0; return result;} 
-    }
-        
-    max++;
-    if (max==(strsSize+1)) return result;
-    
-    }
-}
+// ATTENTION : This method only works in Leetcode
+/*
+C99（6.7.8.32）：On the other hand, the declarationchar *p = "abc";defines p with type ‘‘pointer to char’’ and initializes it to point to an object with type ‘‘array of char’’ with length 4 whose elements are initialized with a character string literal. If an attempt is made to use p to modify the contents of the array, the behavior is undefined.
+
+
+
+*/
+char* longestCommonPrefix(char** strs, int strsSize) {  
+    char* str=strs[0];  
+    int i,j;  
+    if(strsSize==0)return "";  
+    for(i=1;i<strsSize;i++){  
+        j=0;  
+        while(str[j] && strs[i][j] && str[j]==strs[i][j])j++;  
+        str[j]=0;   // in most case ,we could not modify the string;
+    }  
+    return str;  
+}  
 
 
 int main (void){

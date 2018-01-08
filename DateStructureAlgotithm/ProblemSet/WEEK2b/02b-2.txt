@@ -1,0 +1,10 @@
+2.(Counting primitive operation)
+
+for all i=n down to 1 do      // O(n)             n+(n+1)
+  for all j=n down to i do      // O(n^2)         3+5+..+(2n+1) = n(n+2)
+    print "A[i]A[j]"          // O(n)             (1+2+...+n)*2 = n(n+1)
+  end for
+end for
+
+total: 2n^2+5n+1
+which is (O(n^2))
