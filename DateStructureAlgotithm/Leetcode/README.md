@@ -24,4 +24,9 @@
 
 83.Remove Duplicates from Sorted List(the method is not accurate did not free memory)
 
+
+8/1/2018
+
+14.Longest Common Prefix(reference used an undefined method)
+
  
