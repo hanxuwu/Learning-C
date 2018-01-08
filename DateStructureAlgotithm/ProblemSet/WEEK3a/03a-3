@@ -1,0 +1,11 @@
+3.(Storage costs)
+Assume   each pointer 4bytes
+         Vertex       4bytes
+         linked-list node  8bytes
+         adjacency matrix elements as 1-byte boolean
+
+
+Adjacency matrix    V*V + V*4
+
+Adjavency list representation V*4 + 2*E * 8   (each edge is stored twice.)
+
