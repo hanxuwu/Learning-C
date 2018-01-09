@@ -1,0 +1,18 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+    { "key": "shift+enter",        "command": "jupyter.execCurrentCell",
+        "when": "editorFocus && !findWidgetVisible && !replaceActive && !searchViewletVisible" },
+    { "key": "shift+v",            "command": "extension.MarkdownPasteImage",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+oem_5",
+        "command": "extension.MarkdownPaste",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+v",
+        "command": "-extension.MarkdownPaste",
+        "when": "editorTextFocus"
+    }
+]

@@ -1,0 +1,26 @@
+{
+    "python.linting.flake8Enabled": true,
+    "jupyter.appendResults": false,
+    "editor.fontSize": 18,
+    "git.path": "C:\\Program Files\\Git\\mingw64\\libexec\\git-core\\git.exe",
+    "todohighlight.isEnable": true,
+    "workbench.iconTheme": "vscode-icons",
+    "python.tracebackJumper.Enable": true,
+    "graphviz-preview.dotPath": "C:\\Program Files (x86)\\graphviz-2.38\\release\\bin\\dot.exe",
+    "editor.minimap.enabled": false,
+    "workbench.panel.location": "right",
+    "terminal.integrated.fontSize": 20,
+    "clang.diagnostic.enable": true,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressUpdateNotice": false,
+        "suppressWelcomeNotice": true
+    },
+    "workbench.colorTheme": "One Dark Pro Vivid",
+    "workbench.editor.tabSizing": "shrink",
+}

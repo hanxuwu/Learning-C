@@ -1,0 +1,116 @@
+[
+	{
+		"name": "TEST",
+		"rootPath": "c:\\Users\\Hanxu\\Desktop\\TEST",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "TestProjectManagement",
+		"rootPath": "c:\\Study\\VScode\\TestProjectManagement",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "TestGit",
+		"rootPath": "c:\\Study\\VScode\\TestGit",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "TestJupyter",
+		"rootPath": "c:\\Study\\VScode\\TestJupyter",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "TestLatex",
+		"rootPath": "c:\\Study\\VScode\\TestLatex",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "quiz1",
+		"rootPath": "c:\\Study\\VScode\\QUIZ\\quiz1",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "quiz2",
+		"rootPath": "c:\\Study\\VScode\\QUIZ\\quiz2\\quiz2",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "Assignment2",
+		"rootPath": "c:\\Study\\VScode\\Assignment\\Assignment2",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "PythonNotebook",
+		"rootPath": "c:\\Study\\VScode\\PythonNotebook",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "TestPython",
+		"rootPath": "c:\\Study\\VScode\\TestPython",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "TestBlog",
+		"rootPath": "c:\\Study\\VScode\\TestBlog",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "quiz8",
+		"rootPath": "c:\\Study\\VScode\\QUIZ\\quiz8",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "TestPythonLatex",
+		"rootPath": "c:\\Study\\VScode\\TestPythonLatex",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "COMP9311",
+		"rootPath": "c:\\Study\\VScode\\COMP9311",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "Lecture9",
+		"rootPath": "c:\\Study\\VScode\\Lecture\\Lecture9",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "quiz9",
+		"rootPath": "c:\\Study\\VScode\\QUIZ\\quiz9",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "quiz10",
+		"rootPath": "c:\\Study\\VScode\\QUIZ\\quiz10",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "Final",
+		"rootPath": "c:\\Study\\VScode\\Final",
+		"paths": [],
+		"group": ""
+	},
+	{
+		"name": "testC",
+		"rootPath": "c:\\Study\\VScode\\testC",
+		"paths": [],
+		"group": ""
+	}
+]
