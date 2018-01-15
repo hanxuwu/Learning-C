@@ -17,6 +17,15 @@
 # include <stdlib.h>
 # include "pagerank.h" // Constant Argument
 # include "Graph.h" //  Refer to Lecture3 Resource written by Ashesh Mahidadia
+# include "list.h"
+
+// typedef struct PageGraphVar{
+//     int nPages;
+//     int *urlNameArr;
+// };
+
+
+
 
 
 
@@ -26,19 +35,35 @@ int readfile(Graph *g,char * filename){ // read the file add create the Graph
     char words[MAX]; // store the vertex name
     int nPages=0; // number of the Pages (Vertices)
     char buf[100];// buf to store the sscanf 
-    int urlName[100]; // store the digit name of the url
+    int *urlName; // // store the digit name of the url
+    
 
     if((fp=fopen(filename,"r"))==NULL){ // check the file  could be open or not
         fprintf(stderr,"Can't open file \" %s \" \n",filename);
         exit(1);
     }
+    
+    // Count the number of url
+    while(fscanf(fp,"%s",words)==1) {  //read the body of a section
+        puts(words);   // print the file content
+        //sscanf(words,"%s",buf); // save the each section to buffer
+        //urlName[nPages]=(atoi)(buf+3); //keep the interger name of the url then convert to int
+        nPages++; // count the number of url
+        };
+    printf("\nafter first count the number then rewind to build array\n\n"); 
 
+    // store the integer name of the url
+    urlName = malloc(nPages*sizeof(int)); // create the array to store the integer urlName
+    rewind(fp);// from the file start
+    int index=0; // array index;
     while(fscanf(fp,"%s",words)==1) {  //read the body of a section
         puts(words);   // print the file content
         sscanf(words,"%s",buf); // save the each section to buffer
-        urlName[nPages]=(atoi)(buf+3); //keep the interger name of the url then convert to int
-        nPages++; // count the number of url
+        urlName[index]=(atoi)(buf+3); //keep the interger name of the url then convert to int
+        index++; // count the number of url
         };
+    
+    
     printf("number of pages in %s file  is %d  \n",filename,nPages);
     printf("there name is\n");
     for (int i=0;i<nPages;i++)

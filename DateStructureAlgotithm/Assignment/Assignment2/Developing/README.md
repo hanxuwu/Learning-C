@@ -7,3 +7,5 @@
 
 15/1/2018  
 * read the file,save the integer urlname to array
+
+* read the file,dynamic save the integer urlname to array
