@@ -68,7 +68,7 @@ CollectionContext ReadCollection(char * filename){
     return pCol;
 }
 
-
+// read urlXXX.txt section_1
 UrlContext ReadUrlSection_1(int UrlIndex){
     /*
     Initilization
@@ -153,6 +153,7 @@ UrlContext ReadUrlSection_1(int UrlIndex){
     return pUrl;
 }
 
+// read urlXXX.txt section_1 and section_2
 UrlContext ReadUrlSection_2(int UrlIndex){
     /*
     Initilization
@@ -185,7 +186,7 @@ UrlContext ReadUrlSection_2(int UrlIndex){
     char tempwords[1000]=""; // tempory store the char urlname
     int endflag=0; // if find #word the assign flag =1 
     while(fscanf(fp,"%s",words)==1&&endflag==0){ //read the body of a section
-        if((strcmp(words,"Section-2")==0)&&(strcmp(tempwords,"#start")==0)){ //start Detection start from the "Section-1 #start"
+        if((strcmp(words,"Section-2")==0)&&(strcmp(tempwords,"#start")==0)){ //start Detection start from the "Section-2 #start"
             while(fscanf(fp,"%s",words)==1){
                 if((strcmp(words,"#end")!=0)){ // haven't find the "#end"
                 pUrl->nWords++; // count the number of url
@@ -211,7 +212,7 @@ UrlContext ReadUrlSection_2(int UrlIndex){
     endflag=0; // if find #word the assign flag =1 
 
     while(fscanf(fp,"%s",words)==1&&endflag==0){ //read the body of a section
-        if((strcmp(words,"Section-2")==0)&&(strcmp(tempwords,"#start")==0)){ //start Detection start from the "Section-1 #start"
+        if((strcmp(words,"Section-2")==0)&&(strcmp(tempwords,"#start")==0)){ //start Detection start from the "Section-2 #start"
             while(fscanf(fp,"%s",words)==1){
                 if((strcmp(words,"#end")!=0)){ // haven't find the "#end"
                 
@@ -247,7 +248,7 @@ int main(void){
     ReadUrlSection_1(34);
     printf("------------------------");
     UrlContext p2;
-    p2=ReadUrlSection_2(11);
+    p2=ReadUrlSection_2(34);
     for(int i=0;i<p2->nWords;i++){
         printf("%s ",p2->words[i]);
     }
