@@ -19,7 +19,8 @@ typedef struct UrlContextRep{
     int currentUrl; // current url integer name
     int nUrl; // the number of the current url linked
     int * coUrlName;  // corresponding "web page" name
-    char * words; // store the context of the url
+    int nWords; // the number of the section contexts   
+    char ** words; // store the context of the url
 }UrlContextRep;
 
 
@@ -152,12 +153,103 @@ UrlContext ReadUrlSection_1(int UrlIndex){
     return pUrl;
 }
 
+UrlContext ReadUrlSection_2(int UrlIndex){
+    /*
+    Initilization
+    */
+    FILE * fp;//pointer to file
+    UrlContext pUrl; // pointer to Url structure
+    pUrl = ReadUrlSection_1(UrlIndex);
+    pUrl->nWords = 0; // initialize the number of the words
+    pUrl->words =0;
+   
+    /*
+    open the file
+    */
+    char str[100]; // temporaily store the filename
+    char buffer[100]; // temporaily convert UrlIndex to char type
+    sprintf(buffer,"%d",UrlIndex); // convert UrlIndex to char type
+    sprintf(str,"%s%s%s","url",buffer,".txt"); // join the str 
+    printf("\n@@@%s\n",str); // joined string (the filename)
+    
+    if((fp=fopen(str,"r"))==NULL){  //TODO: learn how to strcat
+     fprintf(stderr,"Can't open file \" url%d \" \n",UrlIndex);
+     exit(1);    
+    }
+    
+    
+    /*
+    count the number of url in  the section-1
+    */
+    char words[MAX];// temporily store the section content
+    char tempwords[1000]=""; // tempory store the char urlname
+    int endflag=0; // if find #word the assign flag =1 
+    while(fscanf(fp,"%s",words)==1&&endflag==0){ //read the body of a section
+        if((strcmp(words,"Section-2")==0)&&(strcmp(tempwords,"#start")==0)){ //start Detection start from the "Section-1 #start"
+            while(fscanf(fp,"%s",words)==1){
+                if((strcmp(words,"#end")!=0)){ // haven't find the "#end"
+                pUrl->nWords++; // count the number of url
+                puts(words);
+                }else {
+                    endflag=1; // change the find flag;
+                    break;
+                } 
+            }
+        }
+        sprintf(tempwords,"%s",words);
+    }
+    printf("number of pages in %s file  is %d  \n",str,pUrl->nWords);
+
+     /*
+    Store the integer name of url
+    */
+    pUrl->words = malloc(pUrl->nUrl*sizeof(char *)); // create the array to store the integer urlName
+    rewind(fp);// from the file start
+    int index=0; // array index;
+    char buf[100];// buf to store the sscanf 
+    sprintf(tempwords,"%s","");//initial the tempword
+    endflag=0; // if find #word the assign flag =1 
+
+    while(fscanf(fp,"%s",words)==1&&endflag==0){ //read the body of a section
+        if((strcmp(words,"Section-2")==0)&&(strcmp(tempwords,"#start")==0)){ //start Detection start from the "Section-1 #start"
+            while(fscanf(fp,"%s",words)==1){
+                if((strcmp(words,"#end")!=0)){ // haven't find the "#end"
+                
+                puts(words);   // print the file content                
+                sscanf(words,"%s",buf); // save the each section to buffer
+                
+                char * new= malloc(sizeof(words)*sizeof(char));// allocate memory depends on the size of the context
+                strcpy(new,words); // copy the context
+                int a=strlen(buf);
+                int b=strlen(words);
+                printf("buf:%d\n",a);
+                printf("word:%d\n",b);
+                pUrl->words[index]=new; 
+                index++; // count the number of url
+                }else {
+                    endflag=1; // change the find flag;
+                    break;
+                } 
+            }
+        }
+        sprintf(tempwords,"%s",words);
+    }
+    
+    return pUrl;
+}
+
+
 int main(void){
     CollectionContext p;
     p=ReadCollection("collection.txt"); // read the collection file
     printf("%d\n",p->nPages);// check the nPages
     printf("%d %d",p->urlName[0],p->urlName[1]); // check the array
-
     ReadUrlSection_1(34);
+    printf("------------------------");
+    UrlContext p2;
+    p2=ReadUrlSection_2(11);
+    for(int i=0;i<p2->nWords;i++){
+        printf("%s ",p2->words[i]);
+    }
     return 0;
 }

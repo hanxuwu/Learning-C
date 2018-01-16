@@ -13,3 +13,5 @@
 15/1/2018
 
 * write readfile.h   define structure write function read collection and read section1 
+
+* read section2
