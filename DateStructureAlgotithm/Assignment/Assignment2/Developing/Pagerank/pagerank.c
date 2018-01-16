@@ -9,7 +9,7 @@
  * 
  * ZID: 5148463
  * 
- *use:  gcc -Wall -lm -Werror *.c  -o pagerank.
+ *use:  gcc -Wall -lm -Werror *.c  -o pagerank
  * 
  * **/
 
@@ -51,7 +51,7 @@ int readfile(Graph *g,char * filename){ // read the file add create the Graph
         nPages++; // count the number of url
         };
     printf("\nafter first count the number then rewind to build array\n\n"); 
-
+    printf("the words %s\n",words);
     // store the integer name of the url
     urlName = malloc(nPages*sizeof(int)); // create the array to store the integer urlName
     rewind(fp);// from the file start
