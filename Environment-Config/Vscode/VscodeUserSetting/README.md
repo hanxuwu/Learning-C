@@ -9,7 +9,7 @@
 ![image](https://github.com/hanxuwu/Learning-C/blob/master/Environment-Config/Vscode/VscodeUserSetting/SCREENSHOT/extension_4.PNG)
 
 
-How to download the extension for offline installation  
+## How to download the extension for offline installation  
 
 A VS Code extension's offline install package (VSIX) is   available at:  
  
