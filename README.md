@@ -21,3 +21,7 @@
 ##10/1/2018 vscode user setting  
 
 * add vscode user configuration
+
+##17/1/2018 vscode
+
+* install old version extension(git history)
