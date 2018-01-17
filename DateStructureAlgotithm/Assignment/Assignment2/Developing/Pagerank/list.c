@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 typedef struct Node {
-   int         v;
+   int v;
    struct Node *next; 
 } Node;
 

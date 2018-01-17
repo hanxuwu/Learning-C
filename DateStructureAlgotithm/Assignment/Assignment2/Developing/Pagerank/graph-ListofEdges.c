@@ -15,18 +15,18 @@ typedef struct GraphRep {
 Graph newGraph(int nV) {
    assert(nV >= 0);
    int i;
-
+   
    Graph g = malloc(sizeof(GraphRep));
    assert(g != NULL);
    g->nV = nV;
    g->nE = 0;
-
+   
    // allocate memory for array of lists
    g->edges = malloc(nV * sizeof(List));
    assert(g->edges != NULL);
    for (i = 0; i < nV; i++)
       g->edges[i] = NULL;
-
+   
    return g;
 }
 
@@ -82,3 +82,18 @@ void freeGraph(Graph g) {
 
    free(g);
 }
+
+//  int main(void){
+//      Graph g = newGraph(4);
+// //     // Edge a;
+// //     // a.v = 1;
+// //     // a.w = 2;
+// //     // Edge b;
+// //     // b.v = 0;
+// //     // b.w = 3;
+// //     // insertEdge(g,a);
+// //     // insertEdge(g,b);
+// //     // showGraph(g);
+//      freeGraph(g);
+
+//  }
