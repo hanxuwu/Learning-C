@@ -4,10 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct Node {
-   int v;
-   struct Node *next; 
-} Node;
+
 
 Node *makeNode(int n) {
    Node *new = malloc(sizeof(Node));

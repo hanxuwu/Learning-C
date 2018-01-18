@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <assert.h>
+# include <math.h> 
 # include "pagerank.h" // Constant Argument
 # include "Graph.h" //  Refer to Lecture3 Resource written by Ashesh Mahidadia
 # include "readfile.h"
@@ -95,18 +96,39 @@ PrStruct Pagerank(Graph *g,PrStruct *prs){
     printf("%lf %lf %d",d,diffPR,maxIterations);
     double damping_value = (1.0 - d) / N; // (1-x)/N
 
-    for(int urlIndex=0;urlIndex<N;urlIndex++){ //traverse all the pages
-            printf("\n!%d ",(*prs)->PrArr[urlIndex]->urlIndex);
-            printf("@%d ",(*prs)->PrArr[urlIndex]->outdegree);
-            printf("^%lf \n",(*prs)->PrArr[urlIndex]->PrVal);
-        }
+    
 
-    for(int iter=0;iter<maxIterations;iter++){
+    for(int iter=0;iter<maxIterations;iter++){    
         double change = 0;// to check the differces
+        for(int urlIndex=0;urlIndex<N;urlIndex++){ //traverse all the pages
+            //showLL((*g)->edges[urlIndex]);
+            double rank = 0;
+            Node* a = (*g)->edges[urlIndex]; // there is no node has no outdegree
+            double current_rankval =(*prs)->PrArr[urlIndex]->PrVal;
+            for(int i=0;i<(*prs)->PrArr[urlIndex]->outdegree;i++){
+                //printf("@@%d   ",a->v);
+                rank+=d*((*prs)->PrArr[a->v]->PrVal/(*prs)->PrArr[a->v]->outdegree);
+                a=a->next;          
+            }
+            rank+=damping_value;
+            change+=fabs(current_rankval-rank);
+            (*prs)->PrArr[urlIndex]->PrVal=rank;
+                     
+            
+            
+            //printf("\n!%d ",(*prs)->PrArr[urlIndex]->urlIndex);
+            //printf("@%d ",(*prs)->PrArr[urlIndex]->outdegree);
+            //printf("^%lf \n",(*prs)->PrArr[urlIndex]->PrVal);
+        }
+        if (change < diffPR) break;
         
 
     }
-    
+    for(int urlIndex=0;urlIndex<N;urlIndex++){
+    printf("\n!%d ",(*prs)->PrArr[urlIndex]->urlIndex);
+    printf("@%d ",(*prs)->PrArr[urlIndex]->outdegree);
+    printf("^%.7f \n",(*prs)->PrArr[urlIndex]->PrVal);
+    }
     return prs;
 
 }
