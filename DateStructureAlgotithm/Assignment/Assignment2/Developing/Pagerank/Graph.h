@@ -1,5 +1,12 @@
 // Graph ADT interface ... COMP9024 17s2
 #include <stdbool.h>
+#include "list.h"
+
+typedef struct GraphRep {
+   List *edges;  // array of lists
+   int   nV;     // #vertices
+   int   nE;     // #edges
+} GraphRep;
 
 typedef struct GraphRep *Graph;
 

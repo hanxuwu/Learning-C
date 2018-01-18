@@ -1,16 +1,11 @@
 // Graph ADT
 // Adjacency List Representation ... COMP9024 17s2
 #include "Graph.h"
-#include "list.h"
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct GraphRep {
-   List *edges;  // array of lists
-   int   nV;     // #vertices
-   int   nE;     // #edges
-} GraphRep;
+
 
 Graph newGraph(int nV) {
    assert(nV >= 0);
@@ -40,7 +35,7 @@ void insertEdge(Graph g, Edge e) {
 
    if (!inLL(g->edges[e.v], e.w)) {   // edge e not in graph
       g->edges[e.v] = insertLL(g->edges[e.v], e.w);
-      g->edges[e.w] = insertLL(g->edges[e.w], e.v);
+      //g->edges[e.w] = insertLL(g->edges[e.w], e.v); // with direction 
       g->nE++;
    }
 }
