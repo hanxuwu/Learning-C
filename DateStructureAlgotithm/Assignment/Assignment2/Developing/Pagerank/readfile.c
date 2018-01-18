@@ -4,8 +4,6 @@
 # include "readfile.h"
 
 
-
-
 //read the collection.txt
 CollectionContext ReadCollection(char * filename){
     FILE *fp; // pointer to file
@@ -208,15 +206,8 @@ UrlContext ReadUrlSection_2(int UrlIndex){
                 int a=strlen(buf);
                 int b=strlen(words);
                 printf("buf:%d\n",a);
-                printf("word:%d\n",b);
-                
+                printf("word:%d\n",b);                
                 pUrl->words[index]=new; 
-                // printf("*****%s******\n",pUrl->words[0]);
-                printf("*****%p******\n",pUrl->words[index]);
-                printf("*****%s******\n",pUrl->words[index]);
-                printf("*****%p******\n",pUrl->words);
-                printf("*****%s******\n",pUrl->words[0]);
-                // printf("*****%d******\n",index);
                 index++; // count the number of url
                 }else {
                     endflag=1; // change the find flag;
@@ -228,30 +219,4 @@ UrlContext ReadUrlSection_2(int UrlIndex){
     }
     if(fclose(fp)!=0) fprintf(stderr,"Error closing file\n"); // check if the file close
     return pUrl;
-}
-
-int main(void){
-    // printf("------SECTION2------");
-    // UrlContext p2;
-    // p2=ReadUrlSection_2(11);
-    // printf("%d\n",p2->nWords);
-    // for(int i=0;i<p2->nWords;i++){
-    //     printf("%s ",p2->words[i]);
-    // }
-    // printf("-----------------------------------------");
-    // return 0;
-
-
-    // CollectionContext p;
-    // p=ReadCollection("collection.txt"); // read the collection file
-    // printf("%d\n",p->nPages);// check the nPages
-    // printf("%d %d",p->urlName[0],p->urlName[1]); // check the array
-    //ReadUrlSection_1(34);
-    printf("------------------------");
-    UrlContext p2;
-    p2=ReadUrlSection_2(11);
-    for(int i=0;i<p2->nWords;i++){
-        printf("%s ",p2->words[i]);
-    }
-    return 0;
 }
