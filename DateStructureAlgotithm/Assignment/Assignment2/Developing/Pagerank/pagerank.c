@@ -37,14 +37,66 @@ typedef struct PrNodeRep{
     double PrVal; // PageRank Value
 }PrNodeRep;
 
-typedef PrNodeRep * PrNode; // pointer to PrNode
+typedef struct PrNodeRep * PrNode; // pointer to PrNode
 
 typedef struct PrStructRep{ // PageRank structure
     int nUrl; // number of PrNode
     PrNode * PrArr; // Array store the PrNode
 }PrStructRep;
 
-typedef PrStructRep * PrStruct; // Pointer to Pagerank structure 
+typedef struct PrStructRep * PrStruct; // Pointer to Pagerank structure 
+
+typedef struct IncidenceRep{ // store the Incidence urlname
+    List * incidence;
+    int * size; // size of each array
+}IncidenceRep;
+
+typedef struct IncidenceRep * Incidence;
+
+Incidence gettheincidence (Graph *p,PrStruct *prs){
+    Incidence new = malloc(sizeof(IncidenceRep));
+    assert(NULL!=new);
+    new->size =malloc((*p)->nV * sizeof(int));
+    assert(NULL!=new->size);
+    new->incidence =malloc((*p)->nV * sizeof(List));
+
+    
+    for(int i=0;i<(*p)->nV;i++){ // initial the array  which will store the size
+        printf("%d",(*p)->nV);
+        printf("%d",i);
+        new->size[i]=0;
+        new->incidence[i]=NULL;
+        printf("***%d\n",new->size[i]);        
+
+    }
+
+// count the incidence
+    for(int urlIndex=0;urlIndex<(*p)->nV;urlIndex++){
+        Node* a = (*p)->edges[urlIndex]; // there is no node has no outdegree
+        
+        for(int i=0;i<(*prs)->PrArr[urlIndex]->outdegree;i++){
+            printf("@@%d   ",a->v);
+            List temp=insertLL(new->incidence[a->v],urlIndex); // pit insertLL insert ahead，after insert you should assign the head of list 
+            new->incidence[a->v]=temp; // reassign the head of each list
+            
+            new->size[a->v]++; // count the size of each list
+            a=a->next; //move to next          
+        }        
+        
+    }
+    for(int urlIndex=0;urlIndex<(*p)->nV;urlIndex++){
+    printf("***%d\n",new->size[urlIndex]); // incidence size of each line
+    showLL(new->incidence[urlIndex]); 
+    }
+    return new;
+}
+
+
+
+
+
+
+
 
 /*
 
@@ -79,6 +131,10 @@ PrStruct createPrstruct(CollectionContext p){
     }
     return prs;
 }
+
+
+
+
 
 
 
@@ -221,6 +277,7 @@ int main(int argc,char * argv[]){
     //printf("----------------------------");
     //printf("\ntest outdegree %d\n",prs->PrArr[0]->outdegree);
     createGraph(&g,p,&prs);
-    Pagerank(&g,&prs);
+    gettheincidence(&g,&prs);
+    //Pagerank(&g,&prs);
     return 0;
 }
