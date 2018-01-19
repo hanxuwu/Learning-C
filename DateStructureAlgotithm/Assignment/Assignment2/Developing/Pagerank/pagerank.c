@@ -9,7 +9,7 @@
  * 
  * ZID: 5148463
  * 
- *use:  gcc -Wall -lm -Werror *.c  -o pagerank
+ * use:  gcc -Wall -lm -Werror *.c  -o pagerank
  * 
  * **/
 
@@ -133,21 +133,73 @@ PrStruct createPrstruct(CollectionContext p){
 }
 
 
-
-
-
-
-
-
-
-
-
 /*
 
 RankPage algorithm
 
 */
 PrStruct Pagerank(Graph *g,PrStruct *prs,Incidence *inc){
+    int N = (*g)->nV; // The total pages of the graph
+    printf("%lf %lf %d",d,diffPR,maxIterations);
+    double damping_value = (1.0 - d) / N; // (1-x)/N
+
+    
+    int numberofiter=0;
+    double diff = 0;// to check the differces
+    for(int iter=0;iter<maxIterations;iter++){
+    // int iter=0;
+    // double diff=diffPR;  
+    // while((iter<maxIterations) && (diff>=diffPR)){
+    //    iter++;
+        
+        diff=0;        
+        for(int urlIndex=0;urlIndex<N;urlIndex++){ //traverse all the pages
+            //printf("--------------------------\n");
+            //showLL((*g)->edges[urlIndex]);
+            double rank = 0;
+            //Node* a = (*g)->edges[urlIndex]; // there is no node has no outdegree
+            Node* a = (*inc)->incidence[urlIndex];
+            //printf("-----------$$$$$---------------\n");
+            //showLL(a);
+            for(int i=0;i<(*inc)->size[urlIndex];i++){
+                //printf("@@%d   ",a->v);
+                rank+=d*((*prs)->PrArr[a->v]->PrVal/(*prs)->PrArr[a->v]->outdegree);
+                a=a->next;                    
+            }
+            rank+=damping_value;            
+            double current_rankval =(*prs)->PrArr[urlIndex]->PrVal;
+            //change+=fabs(current_rankval-rank);
+            diff+=fabs(rank-current_rankval);              
+            (*prs)->PrArr[urlIndex]->PrVal=rank;
+                     
+            
+            
+            //printf("\n!%d ",(*prs)->PrArr[urlIndex]->urlIndex);
+            //printf("@%d ",(*prs)->PrArr[urlIndex]->outdegree);
+            //printf("^%lf \n",(*prs)->PrArr[urlIndex]->PrVal);
+        }
+        
+        //printf("\n%.7f",diff);
+        //printf("\n!!%.7f",diff);
+        //printf("**%.7f",diffPR);
+        //printf("\ndiff>=diffPR:%s",diff>=diffPR?"True":"False");
+        if (diff < diffPR) {printf("numberofiter is %d",iter);break;}
+        
+        
+
+    }
+
+    
+    for(int urlIndex=0;urlIndex<N;urlIndex++){
+    printf("\n!%d ",(*prs)->PrArr[urlIndex]->urlIndex);
+    printf("@%d ",(*prs)->PrArr[urlIndex]->outdegree);
+    printf("^%.7f \n",(*prs)->PrArr[urlIndex]->PrVal);
+    }
+    return prs;
+
+}
+// Teacher's algorithm
+PrStruct Pagerank1(Graph *g,PrStruct *prs,Incidence *inc){
     int N = (*g)->nV; // The total pages of the graph
     printf("%lf %lf %d",d,diffPR,maxIterations);
     double damping_value = (1.0 - d) / N; // (1-x)/N
@@ -204,13 +256,6 @@ PrStruct Pagerank(Graph *g,PrStruct *prs,Incidence *inc){
     return prs;
 
 }
-
-
-
-
-
-
-
 
 
 /*
@@ -295,6 +340,7 @@ int main(int argc,char * argv[]){
     createGraph(&g,p,&prs);
     Incidence inc;
     inc=gettheincidence(&g,&prs);
+    //Pagerank1(&g,&prs,&inc);
     Pagerank(&g,&prs,&inc);
     return 0;
 }
