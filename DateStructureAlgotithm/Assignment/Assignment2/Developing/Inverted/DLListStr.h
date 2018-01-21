@@ -22,14 +22,15 @@ DLListStr newDLListStr();
 
 
 
+int add(DLListStr, char *);
 
-
-
+void reset(DLListStr);
 // free up all space associated with list
 void freeDLListStr(DLListStr);
 
+int findNext(DLListStr, char *);
 // display items from a DLListStr, comma separated
-void showDLListStr(DLListStr L);
+void showDLListStr(DLListStr);
 
 
 

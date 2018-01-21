@@ -19,7 +19,8 @@ typedef struct Node *Tree;
 typedef struct Node {
    Tree left, right;
    char  data[100];
-   DLListStr  list;	
+   Tree treeurl;
+   DLListStr list;	
 } Node;
 
 

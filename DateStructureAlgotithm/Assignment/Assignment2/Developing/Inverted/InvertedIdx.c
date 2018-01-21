@@ -19,6 +19,8 @@ Tree newNode(Item it) {
    assert(new != NULL);
    strcpy(new->data, it);  // replace,   data(new) = it;
    left(new) = right(new) = NULL;
+   new->treeurl =newTree();
+   new->list = newDLListStr();
    return new;
 }
 
@@ -48,7 +50,9 @@ void showTreeR(Tree t, int depth) {
       int i;
       //for (i = 0; i < depth; i++)
 	// putchar('\t');// TAB character
-      if(depth!=0) printf("%s\n", data(t));
+      //if(depth!=0) {printf("%s\n", data(t));showTree(t->treeurl);};
+      if(depth!=0) {printf("%s\n", data(t));showDLListStr(t->list);};
+      
       //printf("%s\n", data(t));
       showTreeR(left(t), depth+1);
    }
@@ -78,12 +82,12 @@ Tree TreeInsert(Tree t, Item it,Tree *located) {
    
    if (t == NULL){
       t = newNode(it);
-      //printf("!%s \n",t->data);
+      printf("!%s \n",(t)->data); // the word not in the tree,create a new one
       *located=t;
       //return t;
    }
-   else if (strcmp(it, data(t)) == 0){
-      printf("!%s \n",t->data);
+   else if (strcmp(it, data(t)) == 0){ // find the words
+      printf("!%s \n",(t)->data);
       *located=t;
       //return t;
    }
@@ -93,7 +97,6 @@ Tree TreeInsert(Tree t, Item it,Tree *located) {
 
    else if (strcmp(it, data(t)) > 0)  //replace, else if (it > data(t))
       right(t) = TreeInsert(right(t), it,located);   
-   
    
    return t;
 }

@@ -27,7 +27,7 @@
 '.' (dot), ',' (comma), ';' (semicolon), ? (question mark)
 
 */
-void normalise(CollectionContext p){
+Tree normalise(CollectionContext p){
     UrlContext p2;
     Tree wordtree=newTree(); // create the tree to store the inverted
     Tree curTree=NULL;
@@ -50,17 +50,30 @@ void normalise(CollectionContext p){
             p2->words[i][lword]='\0'; // if the end char is  (dot), ',' (comma), ';' (semicolon), ? (question mark) the reassignment the end
         }
 
-        Tree located = malloc(sizeof(Tree));
+        Tree located;
         TreeInsert(wordtree,p2->words[i],&located); // insert the sort to the tree
         printf("*%s \n",located->data);
-        //freeTree(located);
+
+        // get the name of the url
+        char str[100]; // temporaily store the filename
+        char buffer[100]; // temporaily convert UrlIndex to char type
+        sprintf(buffer,"%d",p2->currentUrl); // convert UrlIndex to char type
+        sprintf(str,"%s%s","url",buffer); // join the str 
+
+        Tree TreeNul;
+        TreeInsert(located->treeurl,str,&TreeNul);
+
+        //add(located->list,str);
+        findNext(located->list,str);
+        
         //printf("@%s \n",p2->words[i]);
     }
-    
-    
     }
-    //showTree(wordtree);
+    
+    return wordtree;
 }
+
+
 
 int main(int argc,char * argv[]){
 
@@ -74,6 +87,7 @@ int main(int argc,char * argv[]){
     printf("------SECTION2------");
 
     // nomolize all the urlcontext    
-    normalise(p);
+    Tree wordtree=normalise(p);
+    showTree(wordtree);
         
 }
