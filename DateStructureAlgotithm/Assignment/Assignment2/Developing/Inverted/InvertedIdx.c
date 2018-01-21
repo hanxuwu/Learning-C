@@ -10,17 +10,8 @@
 #include <string.h>
 #include <assert.h>
 #include "InvertedIdx.h"
-#include "DLListStr.h"
 
-#define data(tree)  ((tree)->data)
-#define left(tree)  ((tree)->left)
-#define right(tree) ((tree)->right)
 
-typedef struct Node {
-   Tree left, right;
-   char  data[100];
-   DLListStr  list;	
-} Node;
 
 // make a new node containing data
 Tree newNode(Item it) {
@@ -33,7 +24,10 @@ Tree newNode(Item it) {
 
 // create a new empty Tree
 Tree newTree() {
-   return NULL;
+  Tree t = malloc(sizeof(Node));
+  assert(t != NULL);
+  left(t) = right(t) = NULL;
+  return t;
 }
 
 // free memory associated with Tree
@@ -47,12 +41,15 @@ void freeTree(Tree t) {
 
 // display Tree sideways
 void showTreeR(Tree t, int depth) {
+   
    if (t != NULL) {
+      
       showTreeR(right(t), depth+1);
       int i;
-      for (i = 0; i < depth; i++)
-	 putchar('\t');            // TAB character
-      printf("%s\n", data(t));
+      //for (i = 0; i < depth; i++)
+	// putchar('\t');// TAB character
+      if(depth!=0) printf("%s\n", data(t));
+      //printf("%s\n", data(t));
       showTreeR(left(t), depth+1);
    }
 }
@@ -77,16 +74,27 @@ bool TreeSearch(Tree t, Item it) {
 }
 
 // insert a new item into a Tree
-Tree TreeInsert(Tree t, Item it) {
-   if (t == NULL)
+Tree TreeInsert(Tree t, Item it,Tree *located) {
+   
+   if (t == NULL){
       t = newNode(it);
+      //printf("!%s \n",t->data);
+      *located=t;
+      //return t;
+   }
+   else if (strcmp(it, data(t)) == 0){
+      printf("!%s \n",t->data);
+      *located=t;
+      //return t;
+   }
 
    else if (strcmp(it, data(t)) < 0)   //replace, else if (it < data(t))
-      left(t) = TreeInsert(left(t), it);
+      left(t) = TreeInsert(left(t), it, located);
 
    else if (strcmp(it, data(t)) > 0)  //replace, else if (it > data(t))
-      right(t) = TreeInsert(right(t), it);
-
+      right(t) = TreeInsert(right(t), it,located);   
+   
+   
    return t;
 }
 

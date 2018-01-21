@@ -6,17 +6,30 @@
 
 
 #include <stdbool.h>
+#include "DLListStr.h"
 
+
+#define data(tree)  ((tree)->data)
+#define left(tree)  ((tree)->left)
+#define right(tree) ((tree)->right)
 typedef char *Item;      // item is just a key
 
 typedef struct Node *Tree;
+
+typedef struct Node {
+   Tree left, right;
+   char  data[100];
+   DLListStr  list;	
+} Node;
+
+
 
 Tree newTree();        // create an empty Tree
 void freeTree(Tree);   // free memory associated with Tree
 void showTree(Tree);   // display a Tree (sideways)
 
 bool TreeSearch(Tree, Item);   // check whether an item is in a Tree
-Tree TreeInsert(Tree, Item);   // insert a new item into a Tree
+Tree TreeInsert(Tree, Item,Tree *);   // insert a new item into a Tree
 
 
 

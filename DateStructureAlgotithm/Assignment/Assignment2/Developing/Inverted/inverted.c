@@ -27,7 +27,12 @@
 '.' (dot), ',' (comma), ';' (semicolon), ? (question mark)
 
 */
-void normalise(UrlContext p2){
+void normalise(CollectionContext p){
+    UrlContext p2;
+    Tree wordtree=newTree(); // create the tree to store the inverted
+    Tree curTree=NULL;
+    for(int i=0;i<p->nPages;i++){ // traverse all the url file
+    p2=ReadUrlSection_2(p->urlName[i]); // read the url file section2
     
     printf("%d\n",p2->nWords);
      for(int i=0;i<p2->nWords;i++){ // traverse all the word in url context
@@ -44,8 +49,17 @@ void normalise(UrlContext p2){
         else if((p2->words[i][lword]=='?'||p2->words[i][lword]=='.'||p2->words[i][lword]==','||p2->words[i][lword]==';')&&(foundchar==0))
             p2->words[i][lword]='\0'; // if the end char is  (dot), ',' (comma), ';' (semicolon), ? (question mark) the reassignment the end
         }
-        printf("%s ",p2->words[i]);
+
+        Tree located = malloc(sizeof(Tree));
+        TreeInsert(wordtree,p2->words[i],&located); // insert the sort to the tree
+        printf("*%s \n",located->data);
+        //freeTree(located);
+        //printf("@%s \n",p2->words[i]);
     }
+    
+    
+    }
+    //showTree(wordtree);
 }
 
 int main(int argc,char * argv[]){
@@ -59,14 +73,7 @@ int main(int argc,char * argv[]){
     printf("\n");
     printf("------SECTION2------");
 
-    // nomolize all the urlcontext
-    UrlContext p2;
-    for(int i=0;i<p->nPages;i++){
-        p2=ReadUrlSection_2(p->urlName[i]); // read the url file section2
-        normalise(p2);
-    }
-    
-
-
-    
+    // nomolize all the urlcontext    
+    normalise(p);
+        
 }
