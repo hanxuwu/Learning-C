@@ -203,7 +203,7 @@ PrStruct Pagerank1(Graph *g,PrStruct *prs,Incidence *inc){
     int N = (*g)->nV; // The total pages of the graph
     printf("%lf %lf %d",d,diffPR,maxIterations);
     double damping_value = (1.0 - d) / N; // (1-x)/N
-
+    double* tempArray=malloc(N*sizeof(double));//temporaily store the rank value
     
     int numberofiter=0;
     //for(int iter=0;iter<maxIterations;iter++){
@@ -212,7 +212,8 @@ PrStruct Pagerank1(Graph *g,PrStruct *prs,Incidence *inc){
     while((iter<maxIterations) && (diff>=diffPR)){
         iter++;
         //double diff = 0;// to check the differces
-        diff=0;        
+        diff=0;
+         
         for(int urlIndex=0;urlIndex<N;urlIndex++){ //traverse all the pages
             //showLL((*g)->edges[urlIndex]);
             double rank = 0;
@@ -222,21 +223,27 @@ PrStruct Pagerank1(Graph *g,PrStruct *prs,Incidence *inc){
             for(int i=0;i<(*inc)->size[urlIndex];i++){
                 //printf("@@%d   ",a->v);
                 rank+=d*((*prs)->PrArr[a->v]->PrVal/(*prs)->PrArr[a->v]->outdegree);
+                printf("%d %f linksfrom%d\n",i,rank,(*prs)->PrArr[a->v]->outdegree);
                 a=a->next;                    
             }
-            rank+=damping_value;            
+            assert(rank<1);
+            rank=rank+damping_value;            
             double current_rankval =(*prs)->PrArr[urlIndex]->PrVal;
             //change+=fabs(current_rankval-rank);
-            diff+=fabs(rank-current_rankval);              
-            (*prs)->PrArr[urlIndex]->PrVal=rank;
-                     
+            diff+=fabs(rank-current_rankval);
+            printf("%d rank%f\n",urlIndex,rank);
+            tempArray[urlIndex]=rank;
+
             
+                     
             
             //printf("\n!%d ",(*prs)->PrArr[urlIndex]->urlIndex);
             //printf("@%d ",(*prs)->PrArr[urlIndex]->outdegree);
             //printf("^%lf \n",(*prs)->PrArr[urlIndex]->PrVal);
         }
-        
+        for(int urlIndex=0;urlIndex<N;urlIndex++){ //IMPORTANT!!:  after calculate all the pagerankvalue then copy the value,otherwize when caluating,the pagerank value is not the previous one 
+        (*prs)->PrArr[urlIndex]->PrVal=tempArray[urlIndex];
+        }
         printf("\n%.7f",diff);
         //printf("\n!!%.7f",diff);
         //printf("**%.7f",diffPR);
@@ -253,6 +260,7 @@ PrStruct Pagerank1(Graph *g,PrStruct *prs,Incidence *inc){
     printf("@%d ",(*prs)->PrArr[urlIndex]->outdegree);
     printf("^%.7f \n",(*prs)->PrArr[urlIndex]->PrVal);
     }
+    free(tempArray);
     return prs;
 
 }
@@ -340,7 +348,7 @@ int main(int argc,char * argv[]){
     createGraph(&g,p,&prs);
     Incidence inc;
     inc=gettheincidence(&g,&prs);
-    //Pagerank1(&g,&prs,&inc);
-    Pagerank(&g,&prs,&inc);
+    Pagerank1(&g,&prs,&inc);
+    //Pagerank(&g,&prs,&inc);
     return 0;
 }
