@@ -60,11 +60,11 @@ Tree normalise(CollectionContext p){
         sprintf(buffer,"%d",p2->currentUrl); // convert UrlIndex to char type
         sprintf(str,"%s%s","url",buffer); // join the str 
 
-        Tree TreeNul;
-        TreeInsert(located->treeurl,str,&TreeNul);
+        //Tree TreeNul;
+        //TreeInsert(located->treeurl,str,&TreeNul);
 
         //add(located->list,str);
-        findNext(located->list,str);
+        insertSetOrd(located->list,str);//inserted in L, L is ordered (increasing) with no duplicates
         
         //printf("@%s \n",p2->words[i]);
     }

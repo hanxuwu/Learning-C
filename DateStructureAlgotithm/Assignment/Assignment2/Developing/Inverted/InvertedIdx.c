@@ -19,7 +19,7 @@ Tree newNode(Item it) {
    assert(new != NULL);
    strcpy(new->data, it);  // replace,   data(new) = it;
    left(new) = right(new) = NULL;
-   new->treeurl =newTree();
+   //new->treeurl =newTree();
    new->list = newDLListStr();
    return new;
 }

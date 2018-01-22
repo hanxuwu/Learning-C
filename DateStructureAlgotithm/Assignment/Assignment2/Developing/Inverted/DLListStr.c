@@ -105,49 +105,59 @@ void reset(DLListStr it){
    pre-reqisite: L is ordered (increasing) with no duplicates
    post-condition: val is inserted in L, L is ordered (increasing) with no duplicates
 */
+
 int insertSetOrd(DLListStr it, char *val){
-    it->nitems++;
-
-    if (it==NULL) return 0; // no exist linked list return 0
-    DLListNode * new;
-    new=newDLListNode();
-    assert(NULL!=new);
-    strcpy(new->value, val);
-
-    it->curr->prev->next=new;
-    new->prev = it->curr->prev;// |first|<--->|cursor|<--->|last|
-    new->next=it->curr;
-    it->curr->prev = new; // |first|<--->|newNode|<--->|cursor|<--->|last|
-    return 1;  // add successfully  return 1
-
-
-}
-
-//Returns pointer to the next value in it that matches the given value v and advances the cursor position past the value returned.
-int findNext(DLListStr it, char *val){
     reset(it);
 	assert(NULL!=it);
     DLListNode * cur;
     cur=it->curr->next;
-    while(cur!=it->last){
-        if( strcmp(val, cur->value) <= 0){
-            it->curr->prev->next=it->curr->next; //link two nodes adjacent to the cursor
-            it->curr->next->prev = it->curr->prev;
-
-            cur->next->prev = it->curr;//link cursor next to the found node
-            it->curr->next = cur->next;
-
-            it->curr->prev = cur;
-            cur->next = it->curr;
+    if(cur==it->last){  //|first|<--->|cursor|<--->|last(cur)|
+        add(it,val);
+        reset(it);
+        return 1;
+    }else if((strcmp(val,cur->value)<0)){ // allways put the smallest at first   |first|<--->|cursor|<--->|cur|<--->|last|
+        add(it,val);
+        reset(it);
+        return 1;
+    }else if((strcmp(val,cur->value)==0)){ //elimnates duplicate urls 
+        reset(it);
+        return 1;
+    }
+    
+    while(cur!=it->last){ // check all the url in the DLLlist
+        if((strcmp(val,cur->value) == 0)){ // eliminate the duplicates
+        reset(it); 
+        return 0;
+        }    
+        if(((strcmp(cur->value,val) > 0))){ // Each list of urls (for a single word) should be alphabetically ordered, using ascending order.
             
-			return 1;
+             cur=cur->prev;//|first|<--->|cursor|<--->|cur|<--->|last|  should assert it to the prev of the lagest one
+             it->curr->prev->next=it->curr->next; //link two nodes adjacent to the cursor
+             it->curr->next->prev = it->curr->prev;
+
+             cur->next->prev = it->curr;//link cursor next to the found node
+             it->curr->next = cur->next;
+
+             it->curr->prev = cur;
+             cur->next = it->curr;
+             add(it,val); // add the value
+             reset(it);
+             return 0;
         }
         cur=cur->next; // keep searching
-		
     }
-	
-  add(it,val);
-  return 0;
+    cur=cur->prev; // now cur == it->last search at the end,there is no duplicate and no larger one
+             it->curr->prev->next=it->curr->next; //link two nodes adjacent to the cursor
+             it->curr->next->prev = it->curr->prev;
+
+             cur->next->prev = it->curr;//link cursor next to the found node
+             it->curr->next = cur->next;
+
+             it->curr->prev = cur;
+             cur->next = it->curr;
+             add(it,val);
+             reset(it); 
+    return 0;
 }
 
 // additional function to show the link list
