@@ -13,22 +13,8 @@
 
 #include "DLListStr.h"
 
-// data structures representing DLListStr
 
-typedef struct DLListNode {
-	char   value[100];  // value of this list item (string)
-	struct DLListNode *prev;
-	               // pointer previous node in list
-	struct DLListNode *next;
-	               // pointer to next node in list
-} DLListNode;
 
-typedef struct DLListRep {
-	int  nitems;      // count of items in list
-	DLListNode *first; // first node in list
-	DLListNode *curr;  // current node in list
-	DLListNode *last;  // last node in list
-} DLListRep;
 
 
 // Create a static new Node
@@ -45,7 +31,7 @@ static DLListNode * newDLListNode(){
 //  |first|<---->|cursor|<----->|last|
 DLListStr newDLListStr(){
     DLListStr new;
-    new = malloc(sizeof(DLListRep));
+    new = malloc(sizeof(struct DLListRep));
     assert(NULL!=new);
     DLListNode * first = newDLListNode();// create the static first Node
     //assert(NULL!=first);

@@ -73,6 +73,46 @@ Tree normalise(CollectionContext p){
     return wordtree;
 }
 
+// traverse Tree sideways
+void traverseTreeR(Tree t, int depth,FILE * fp) {
+   if (t != NULL) {      
+      traverseTreeR(left(t), depth+1,fp); // alphabet order so traverse the left branch first
+      if(depth!=0) { // no need to write the root
+          printf("%s\n", data(t));
+          fputs(data(t),fp); // write the word name
+          fputs("  ",fp);
+          showDLListStr(t->list);
+          struct DLListNode * curr;  
+          curr = t->list->first->next;
+          while(curr->next!=t->list->last){ // traverse  the DLList except the last one
+              if(curr != t->list->curr){
+                fputs(curr->value,fp); // write the urlname with space
+                fputs(" ",fp);
+        }
+        curr = curr->next;
+    }
+    fputs(curr->value,fp);   // write the last urlname with out space
+    fputs("\n",fp);
+    
+          };
+      traverseTreeR(right(t), depth+1,fp);
+   }
+}
+
+void writefile(Tree t,char* filename) {
+   FILE * fp; // pointer to file 
+   if((fp = fopen(filename,"w"))==NULL)  // open the file 
+{
+    fprintf(stderr,"Can't create output file.\n");
+    exit(3);
+}
+   traverseTreeR(t, 0,fp); // traverse the Tree
+
+   if(fclose(fp)!=0){  // close the file 
+    fprintf(stderr,"Error in closing files\n");
+}
+}
+
 
 
 int main(int argc,char * argv[]){
@@ -88,6 +128,6 @@ int main(int argc,char * argv[]){
 
     // nomolize all the urlcontext    
     Tree wordtree=normalise(p);
-    showTree(wordtree);
-        
+    //showTree(wordtree);
+    writefile(wordtree,"invertedIndex.txt"); // create the invertedIndex
 }
