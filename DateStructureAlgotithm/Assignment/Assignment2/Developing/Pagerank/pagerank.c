@@ -129,6 +129,7 @@ PrStruct createPrstruct(CollectionContext p){
     for(int urlIndex=0;urlIndex<N;urlIndex++){
         prs->PrArr[urlIndex]=createPrNode(urlIndex,InitPrVal); // TODO:count the outdegree
     }
+    prs->nUrl=N;
     return prs;
 }
 
@@ -260,8 +261,10 @@ PrStruct Pagerank1(Graph *g,PrStruct *prs,Incidence *inc){
     printf("@%d ",(*prs)->PrArr[urlIndex]->outdegree);
     printf("^%.7f \n",(*prs)->PrArr[urlIndex]->PrVal);
     }
+
+    
     free(tempArray);
-    return prs;
+    return *prs;
 
 }
 
@@ -305,6 +308,58 @@ Graph *createGraph(Graph *g,CollectionContext pCol,PrStruct *prs){
     showGraph(*g);
     return g;
 }
+/*
+
+modify Insertion code from Lecture 1 Prpgram week1a to sort the pagerank
+
+*/
+
+void insertionSort(PrStruct * prs) {
+   int n=(*prs)->nUrl; // number of the nodes
+   int i;
+   for (i = 1; i < n; i++) {
+      double element = (*prs)->PrArr[i]->PrVal; //current Pagerank value
+      int element1 = (*prs)->PrArr[i]->urlIndex; // current  UrlIndex
+      int element2 = (*prs)->PrArr[i]->outdegree; // current  outdegree
+      int j = i-1;
+      while (j >= 0 && (*prs)->PrArr[j]->PrVal > element) {  // ... work down the ordered list
+         (*prs)->PrArr[j+1]->PrVal = (*prs)->PrArr[j]->PrVal;
+         (*prs)->PrArr[j+1]->outdegree = (*prs)->PrArr[j]->outdegree;
+         (*prs)->PrArr[j+1]->urlIndex = (*prs)->PrArr[j]->urlIndex;               // ... moving elements up
+         j--;
+      }
+       (*prs)->PrArr[j+1]->PrVal = element;
+       (*prs)->PrArr[j+1]->outdegree=element2;
+       (*prs)->PrArr[j+1]->urlIndex=element1;   // and insert in correct position
+   }
+}
+
+/*
+
+Output the txt file  with thw context:
+
+urlXX  outdegree   PagerankValue
+
+*/
+
+void writePRfile(PrStruct prs,CollectionContext p,char* filename){
+
+    FILE *fp;
+    if((fp = fopen(filename,"w"))==NULL){  // open the file 
+    fprintf(stderr,"Can't create output file.\n");
+    exit(3);
+    }
+
+    for (int h=(prs)->nUrl-1;h!=-1;h--){
+        fprintf(fp, "url%d, %d, ", (p)->urlName[(prs)->PrArr[h]->urlIndex], (prs)->PrArr[h]->outdegree);
+        fprintf(fp, "%.7f\n", (prs)->PrArr[h]->PrVal);   
+    }
+
+    if(fclose(fp)!=0){  // close the file 
+    fprintf(stderr,"Error in closing files\n");
+}
+}
+
 
 
 
@@ -349,6 +404,14 @@ int main(int argc,char * argv[]){
     Incidence inc;
     inc=gettheincidence(&g,&prs);
     Pagerank1(&g,&prs,&inc);
+    insertionSort(&prs);
+    writePRfile(prs,p,"pagerankListtest.txt");
+    printf("\n%d\n",prs->nUrl);
+
+
+    for (int h=prs->nUrl-1;h!=-1;h--){
+        printf("@@%d %d %.7f\n",p->urlName[(prs)->PrArr[h]->urlIndex],(prs)->PrArr[h]->outdegree,(prs)->PrArr[h]->PrVal);
+    }
     //Pagerank(&g,&prs,&inc);
     return 0;
 }
