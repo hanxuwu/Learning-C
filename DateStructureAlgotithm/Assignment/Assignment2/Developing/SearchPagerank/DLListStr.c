@@ -107,7 +107,7 @@ int insertSetOrd(DLListStr it, char *val){
         return 1;
     }else if((strcmp(val,cur->value)==0)){ //elimnates duplicate urls 
         reset(it);
-        return 1;
+        return 0;
     }
     
     while(cur!=it->last){ // check all the url in the DLLlist
@@ -128,7 +128,7 @@ int insertSetOrd(DLListStr it, char *val){
              cur->next = it->curr;
              add(it,val); // add the value
              reset(it);
-             return 0;
+             return 1;
         }
         cur=cur->next; // keep searching
     }
@@ -143,7 +143,7 @@ int insertSetOrd(DLListStr it, char *val){
              cur->next = it->curr;
              add(it,val);
              reset(it); 
-    return 0;
+    return 1;
 }
 
 // additional function to show the link list

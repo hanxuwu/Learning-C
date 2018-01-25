@@ -9,7 +9,7 @@
  * 
  * ZID: 5148463
  * 
- * use:  gcc -Wall -lm -Werror *.c  -o pagerank
+ * use:  gcc -Wall -lm -Werror *.c  -o Inverted
  * 
  * **/
 
@@ -36,19 +36,7 @@ Tree normalise(CollectionContext p){
     
     printf("%d\n",p2->nWords);
      for(int i=0;i<p2->nWords;i++){ // traverse all the word in url context
-        int foundchar=0; // find the word's end
-        for(int lword=strlen(p2->words[i]);lword!=-1;lword--){ // travers all the char in each word
-        //printf("%d",lword);
-        //printf("%c\n",p2->words[i][lword]);
-        if((foundchar==0)&&(p2->words[i][lword]!='?')&&(p2->words[i][lword]!='.')&&(p2->words[i][lword]!=',')&&(p2->words[i][lword]!=';')&&(p2->words[i][lword]!='\0')){
-            foundchar=1; //end is the first char that not equal to punctuation marks,if find the end other no need to delete
-        } 
-        if(p2->words[i][lword]>='A'&&p2->words[i][lword]<='Z'){//converting all characters to lowercase
-            p2->words[i][lword]+=32;       
-        }
-        else if((p2->words[i][lword]=='?'||p2->words[i][lword]=='.'||p2->words[i][lword]==','||p2->words[i][lword]==';')&&(foundchar==0))
-            p2->words[i][lword]='\0'; // if the end char is  (dot), ',' (comma), ';' (semicolon), ? (question mark) the reassignment the end
-        }
+        normalizeString(p2->words[i]);
 
         Tree located;
         TreeInsert(wordtree,p2->words[i],&located); // insert the sort to the tree
