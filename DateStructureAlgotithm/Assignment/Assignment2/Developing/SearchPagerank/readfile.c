@@ -23,27 +23,27 @@ CollectionContext ReadCollection(char * filename){
 
     // count the number of url
     while(fscanf(fp,"%s",words)==1){  //read the body of a section
-        puts(words); // print the context        
+        puts(words); // print the context TODO:        
         pCol->nPages++; // count the number of url
     }
-    printf("the words now is %s\n",words);
-    printf("\nafter first count the number then rewind to build array\n\n"); 
+    printf("the words now is %s\n",words);//TODO:
+    printf("\nafter first count the number then rewind to build array\n\n"); //TODO:
     
     // store the integer name of the url
     pCol->urlName = malloc(pCol->nPages*sizeof(int)); // create the array to store the integer urlName
     rewind(fp);// from the file start
     int index=0; // array index;
     while(fscanf(fp,"%s",words)==1) {  //read the body of a section
-        puts(words);   // print the file content
+        puts(words);   // print the file content TODO:
         sscanf(words,"%s",buf); // save the each section to buffer
         pCol->urlName[index]=(atoi)(buf+3); //keep the interger name of the url then convert to int
         index++; // count the number of url
         };
 
-    printf("number of pages in %s file  is %d  \n",filename,pCol->nPages);
-    printf("there name is\n");
-    for (int i=0;i<pCol->nPages;i++) //print the url name
-    printf("%d ",pCol->urlName[i]);
+    printf("number of pages in %s file  is %d  \n",filename,pCol->nPages);//TODO:
+    printf("there name is\n");//TODO:
+    for (int i=0;i<pCol->nPages;i++) //print the url name//TODO:
+    printf("%d ",pCol->urlName[i]);//TODO:
     if(fclose(fp)!=0) fprintf(stderr,"Error closing file\n"); // check if the file close
     return pCol;
 }
@@ -70,7 +70,7 @@ UrlContext ReadUrlSection_1(int UrlIndex){
     char buffer[100]; // temporaily convert UrlIndex to char type
     sprintf(buffer,"%d",UrlIndex); // convert UrlIndex to char type
     sprintf(str,"%s%s%s","url",buffer,".txt"); // join the str 
-    printf("\n@@@%s\n",str); // joined string (the filename)
+    printf("\n@@@%s\n",str); // joined string (the filename)TODO:
     
     if((fp=fopen(str,"r"))==NULL){  //TODO: learn how to strcat
      fprintf(stderr,"Can't open file \" url%d \" \n",UrlIndex);
@@ -87,7 +87,7 @@ UrlContext ReadUrlSection_1(int UrlIndex){
             while(fscanf(fp,"%s",words)==1){
                 if((strcmp(words,"#end")!=0)){ // haven't find the "#end"
                 pUrl->nUrl++; // count the number of url
-                puts(words);
+                puts(words);//TODO:
                 }else {
                     endflag=1; // change the find flag;
                     break;
@@ -112,7 +112,7 @@ UrlContext ReadUrlSection_1(int UrlIndex){
             while(fscanf(fp,"%s",words)==1){
                 if((strcmp(words,"#end")!=0)){ // haven't find the "#end"
                 
-                puts(words);   // print the file content
+                puts(words);   // print the file content //TODO:
                 sscanf(words,"%s",buf); // save the each section to buffer
                 pUrl->coUrlName[index]=(atoi)(buf+3); //keep the interger name of the url then convert to int
                 index++; // count the number of url
@@ -125,10 +125,10 @@ UrlContext ReadUrlSection_1(int UrlIndex){
         sprintf(tempwords,"%s",words);
     }
 
-    printf("number of pages in %s file  is %d  \n",str,pUrl->nUrl);
-    printf("there name is\n");
-    for (int i=0;i<pUrl->nUrl;i++) //print the url name
-    printf("%d ",pUrl->coUrlName[i]);
+    printf("number of pages in %s file  is %d  \n",str,pUrl->nUrl);//TODO:
+    printf("there name is\n");//TODO:
+    for (int i=0;i<pUrl->nUrl;i++) //print the url name//TODO:
+    printf("%d ",pUrl->coUrlName[i]);//TODO:
     if(fclose(fp)!=0) fprintf(stderr,"Error closing file\n"); // check if the file close
     return pUrl;
 }
@@ -151,7 +151,7 @@ UrlContext ReadUrlSection_2(int UrlIndex){
     char buffer[100]; // temporaily convert UrlIndex to char type
     sprintf(buffer,"%d",UrlIndex); // convert UrlIndex to char type
     sprintf(str,"%s%s%s","url",buffer,".txt"); // join the str 
-    printf("\n@@@%s\n",str); // joined string (the filename)
+    printf("\n@@@%s\n",str); // joined string (the filename)TODO:
     
     if((fp=fopen(str,"r"))==NULL){  //TODO: learn how to strcat
      fprintf(stderr,"Can't open file \" url%d \" \n",UrlIndex);
@@ -170,7 +170,7 @@ UrlContext ReadUrlSection_2(int UrlIndex){
             while(fscanf(fp,"%s",words)==1){
                 if((strcmp(words,"#end")!=0)){ // haven't find the "#end"
                 pUrl->nWords++; // count the number of url
-                puts(words);
+                puts(words);//TODO:
                 }else {
                     endflag=1; // change the find flag;
                     break;
@@ -179,7 +179,7 @@ UrlContext ReadUrlSection_2(int UrlIndex){
         }
         sprintf(tempwords,"%s",words);
     }
-    printf("number of pages in %s file  is %d  \n",str,pUrl->nWords);
+    printf("number of pages in %s file  is %d  \n",str,pUrl->nWords);//TODO:
 
      /*
     Store the integer name of url
@@ -198,15 +198,15 @@ UrlContext ReadUrlSection_2(int UrlIndex){
             while(fscanf(fp,"%s",words)==1){
                 if((strcmp(words,"#end")!=0)){ // haven't find the "#end"
                 
-                puts(words);   // print the file content                
+                puts(words);   // print the file content        TODO:        
                 sscanf(words,"%s",buf); // save the each section to buffer
                 
                 char * new= malloc(sizeof(words)*sizeof(char));// allocate memory depends on the size of the context          
                 strcpy(new,words); // copy the context
-                int a=strlen(buf);
-                int b=strlen(words);
-                printf("buf:%d\n",a);
-                printf("word:%d\n",b);                
+                int a=strlen(buf);//TODO:
+                int b=strlen(words);//TODO:
+                printf("buf:%d\n",a);//TODO:
+                printf("word:%d\n",b);//TODO:          
                 pUrl->words[index]=new; 
                 index++; // count the number of url
                 }else {
@@ -232,7 +232,8 @@ UrlContext ReadUrlSection_2(int UrlIndex){
 */
 char * normalizeString(char * word){
     int foundchar=0;
-    for(int lword=strlen(word);lword!=-1;lword--){ // travers all the char in each word
+    int lword;
+    for(lword=strlen(word);lword!=-1;lword--){ // travers all the char in each word
         //printf("%d",lword);
         //printf("%c\n",p2->words[i][lword]);
         if((foundchar==0)&&(word[lword]!='?')&&(word[lword]!='.')&&(word[lword]!=',')&&(word[lword]!=';')&&(word[lword]!='\0')){

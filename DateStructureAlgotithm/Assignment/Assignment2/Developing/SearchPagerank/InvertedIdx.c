@@ -47,7 +47,6 @@ void showTreeR(Tree t, int depth) {
    if (t != NULL) {
       
       showTreeR(right(t), depth+1);
-      int i;
       //for (i = 0; i < depth; i++)
 	// putchar('\t');// TAB character
       //if(depth!=0) {printf("%s\n", data(t));showTree(t->treeurl);};
@@ -82,12 +81,12 @@ Tree TreeInsert(Tree t, Item it,Tree *located) {
    
    if (t == NULL){
       t = newNode(it);
-      printf("!%s \n",(t)->data); // the word not in the tree,create a new one
+      printf("!%s \n",(t)->data); // the word not in the tree,create a new one TODO:
       *located=t;
       //return t;
    }
    else if (strcmp(it, data(t)) == 0){ // find the words
-      printf("!%s \n",(t)->data);
+      printf("!%s \n",(t)->data);//TODO:
       *located=t;
       //return t;
    }

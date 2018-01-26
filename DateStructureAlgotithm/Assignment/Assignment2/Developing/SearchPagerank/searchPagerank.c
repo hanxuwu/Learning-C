@@ -78,23 +78,21 @@ int findIntersectionIndex(char* filename,char* keywords,SearchStruct *sst){
     }
     // count the number of url
     char delim[2] = " ";// the dividor
-    char words[MAX];// temporily store the section content
-    char tempwords[1000]=""; // tempory store the char urlname
     int endflag=0;
     int findflag=0; // find the words 
     char buffer[512]; 
     while(fgets(buffer,511,fp)!=NULL&&endflag==0){ //read the body by lines
-        printf("%s",buffer);
+        printf("%s",buffer);//TODO: 
         if ((strstr(buffer, keywords))){ // find the keywords
             
             char *url = strtok(buffer,delim); //get token 
             if(strcmp(url,keywords)==0){ // ensure it's keysword not like   "dd" find "add"
             findflag=1;
-            printf("@%s\n",url);
+            printf("@%s\n",url);//TODO:
             
             while((url=strtok(NULL,delim))&&(strstr(url,"url")!=NULL)){ // get rid of the empty token
             CheckandCount(url,sst); // add to the DLLlist
-            printf("@%s\n",url);
+            printf("@%s\n",url);//TODO:
             }
             break;
             }
@@ -103,26 +101,30 @@ int findIntersectionIndex(char* filename,char* keywords,SearchStruct *sst){
        
         //sprintf(tempwords,"%s",words);
     }
+    if(fclose(fp)!=0) fprintf(stderr,"Error closing file\n"); // check if the file close
     if(findflag==0) return 1; // no word in the index
+    return 0;
 
 }
 
 DLListStr  urlIndexCounter(SearchStruct *sst){
      DLListStr new=newDLListStr(); // DDList store the  result
      int nUrlIndex=(*sst)->nUrlIndex; 
-     printf("%d\n",nUrlIndex);
+     printf("%d\n",nUrlIndex);//TODO:
      int nSetUrlIndex=(*sst)->nSetUrlIndex;
-     printf("%d\n",nSetUrlIndex);
+     printf("%d\n",nSetUrlIndex);//TODO:
      DLListNode * currset;
      currset = (*sst)->SetUrlIndex->first->next->next; // first->next is cursor
-     for(int i=0;i<nSetUrlIndex;i++){
-        char *current;
+     char *current =malloc(sizeof(char*));
+     int i;
+     for(i=0;i<nSetUrlIndex;i++){
         strcpy(current,currset->value);
-        printf("^^^^^^^^^^^^^%s\n",current);
+        printf("^^^^^^^^^^^^^%s\n",current);//TODO:
         DLListNode * currall;
         currall=(*sst)->urlIndex->first->next; // traverse all the list
         int counter=0;
-        for(int j=0;j<nUrlIndex;j++){
+        int j;
+        for(j=0;j<nUrlIndex;j++){
             if(strcmp(current,currall->value)==0) counter++; // if the result show N times,it's the final result
             //printf("***%d\n",counter);
             currall=currall->next;
@@ -130,9 +132,10 @@ DLListStr  urlIndexCounter(SearchStruct *sst){
         if (counter==(*sst)->nSearchWord) add(new,current);
         currset=currset->next;
     }
-     printf("--------------------------------");
-     showDLListStr(new);
-     printf("%d",new->nitems);
+     printf("--------------------------------");//TODO:
+     showDLListStr(new);//TODO:
+     printf("%d",new->nitems);//TODO:
+     free(current);
      return new;
 }
 
@@ -158,10 +161,13 @@ char * getthepangrank(char* filename,DLListStr list){
             
             if ((strstr(words, "url"))) {
                 //printf("\n**%s\n",normalwords);
-                
-                for(int i=0;i<list->nitems;i++){
+                int i;
+                for(i=0;i<list->nitems;i++){
                 //printf("\n---%s***%s\n",currentkeyword,words);
-                if(strcmp(currentkeyword,normalwords)==0){
+                int intc=(atoi)(currentkeyword+3);
+                int inta=(atoi)(normalwords+3);
+                //if(strcmp(currentkeyword,normalwords)==0){
+                if(inta==intc){
                     //printf("\n---%s***%s\n",currentkeyword,words);
                     //fprintf(stdout,currentkeyword);
                     //printf("%s",new[0]);
@@ -193,7 +199,7 @@ char * getthepangrank(char* filename,DLListStr list){
         
 
 
-
+    if(fclose(fp)!=0) fprintf(stderr,"Error closing file\n"); // check if the file close
     free(normalwords);
     return NULL;
 
@@ -210,8 +216,9 @@ int main(int argc,char * argv[]){
     
     if(argc>1){
         SearchStruct sst = initSearchStruct(argc); // initialize the Search struct
-        for(int i=1;i<argc;i++){
-            printf("***********%s***********",argv[i]);
+        int i;
+        for(i=1;i<argc;i++){
+            printf("***********%s***********",argv[i]);//TODO:
             normalizeString(argv[i]);
             //printf("%s\n",argv[i]);
             int flag=findIntersectionIndex("invertedIndex.txt",argv[i],&sst);
@@ -220,8 +227,8 @@ int main(int argc,char * argv[]){
                 exit(0);
             }
         }
-        showDLListStr(sst->urlIndex);
-        showDLListStr(sst->SetUrlIndex);   
+        showDLListStr(sst->urlIndex);//TODO:
+        showDLListStr(sst->SetUrlIndex);   //TODO:
         DLListStr urllist=urlIndexCounter(&sst);
         getthepangrank("pagerankList.txt",urllist);
 
