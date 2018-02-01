@@ -107,7 +107,7 @@ int findIntersectionIndex(char* filename,char* keywords,SearchStruct *sst){
 
 }
 
-DLListStr  urlIndexCounter(SearchStruct *sst){
+DLListStr  urlIndexCounter(SearchStruct *sst,int target){
      DLListStr new=newDLListStr(); // DDList store the  result
      int nUrlIndex=(*sst)->nUrlIndex; 
      printf("%d\n",nUrlIndex);//TODO:
@@ -129,7 +129,8 @@ DLListStr  urlIndexCounter(SearchStruct *sst){
             //printf("***%d\n",counter);
             currall=currall->next;
         }
-        if (counter==(*sst)->nSearchWord) add(new,current);
+        //if (counter==(*sst)->nSearchWord) add(new,current);
+        if (counter==target) add(new,current);
         currset=currset->next;
     }
      printf("--------------------------------");//TODO:
@@ -139,8 +140,8 @@ DLListStr  urlIndexCounter(SearchStruct *sst){
      return new;
 }
 
-char * getthepangrank(char* filename,DLListStr list){
-    
+char * getthepangrank(char* filename,DLListStr list,int* nprint){
+    if (*nprint==MAX_OUT_NUMBER) return NULL;
     FILE * fp; //pointer to file
     char words[MAX];// store the vertex name
     
@@ -149,11 +150,11 @@ char * getthepangrank(char* filename,DLListStr list){
     }
     DLListNode * current;
     current=list->first->next;
-    int index=0;
+    //int index=0;
     
         char * normalwords=malloc(1000*sizeof(char));
         char * currentkeyword = current->value;
-        while(fscanf(fp,"%s",words)==1&&(index<=MAX_OUT_NUMBER)){
+        while(fscanf(fp,"%s",words)==1){
             
             strcpy(normalwords,words); // for normalize
             normalizeString(normalwords); // delete the comma
@@ -173,8 +174,10 @@ char * getthepangrank(char* filename,DLListStr list){
                     //printf("%s",new[0]);
                     //strcpy(new,words);
                     //printf("%s\n",normalwords);
-                    fprintf(stdout,"%s\n",normalwords);
-                    index++;
+                    fprintf(stdout,"🍣%s\n",normalwords);
+                    //index++;
+                    (*nprint)++;
+                    if (*nprint==MAX_OUT_NUMBER) return NULL;
                     current=list->first->next;
                     currentkeyword = current->value;
                     break;
@@ -221,16 +224,21 @@ int main(int argc,char * argv[]){
             printf("***********%s***********",argv[i]);//TODO:
             normalizeString(argv[i]);
             //printf("%s\n",argv[i]);
-            int flag=findIntersectionIndex("invertedIndex.txt",argv[i],&sst);
-            if(flag==1){
-                fprintf(stderr,"There is no such word in index");
-                exit(0);
-            }
+            findIntersectionIndex("invertedIndex.txt",argv[i],&sst);
+            //if(flag==1){
+            //    fprintf(stderr,"There is no such word in index");
+            //    exit(0);
+            //}
         }
         showDLListStr(sst->urlIndex);//TODO:
         showDLListStr(sst->SetUrlIndex);   //TODO:
-        DLListStr urllist=urlIndexCounter(&sst);
-        getthepangrank("pagerankList.txt",urllist);
+        int ncount;
+        int nprint;
+        nprint=0;
+        for(ncount=(sst)->nSearchWord;ncount>0;ncount--){
+        DLListStr urllist=urlIndexCounter(&sst,ncount);
+        getthepangrank("pagerankList.txt",urllist,&nprint);
+        }
 
     }
     else{
