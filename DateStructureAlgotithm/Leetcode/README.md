@@ -37,5 +37,8 @@
 
 617.Merge Two Binary Trees  (reference the recursive solution)  
 
+2/2/2018  
+669.Trim a Binary Search Tree
+
 
  
