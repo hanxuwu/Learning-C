@@ -38,7 +38,21 @@
 617.Merge Two Binary Trees  (reference the recursive solution)  
 
 2/2/2018  
-669.Trim a Binary Search Tree
+669.Trim a Binary Search Tree  
+
+3/2/2018  
+637.Average of Levels in Binary Tree (use DFS save the layer of the tree,and save each layer to array)  
+
+104.Maximum Depth of Binary Tree
+
+226.InvertBinaryTree(write in 2mins)  
+
+4/2/2018  
+653.TwoSumIV-InputisaBST(inorder traverse in a tree)  
+
+606.Construct String from Binary Tree(reference solution in Leetcode)  
+
+
 
 
  

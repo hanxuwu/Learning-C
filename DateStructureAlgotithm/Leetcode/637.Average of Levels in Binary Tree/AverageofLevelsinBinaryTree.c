@@ -28,50 +28,42 @@ double* averageOfLevels(struct TreeNode* root, int* returnSize) {
  * Note: The returned array must be malloced, assume caller calls free().
  */
 
-void traverseR(struct TreeNode*root,int * returnSize,double* temp){
-    if(root!=NULL){
-        *returnSize+=1;
-        //traverse(root->left,returnSize);
-        temp[*returnSize]+=root->val;
-        temp[*returnSize]+=root->val;
-        traverseR(root->right,returnSize,temp);
-    }
-}
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+/**
+ * Return an array of size *returnSize.
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+#define MAX_LAYER 1000
 
-void traverseL(struct TreeNode*root,int * returnSize,double* temp){
-    if(root!=NULL){
-        //*returnSize+=1;
-        temp[*returnSize]+=root->val;
-        traverseL(root->left,returnSize,temp);
-        traverseL(root->right,returnSize,temp);
-    }
-}
-
-void traverse(struct TreeNode*root,int i,double* temp,double*num){
+void traverse(struct TreeNode*root,int i,double* temp,double*num,int *max){
+    if (i>=(*max)) *max=i;
     if(root!=NULL){
         temp[i]+=root->val;
         num[i]+=1;
-        traverse(root->left,i+1,temp,num);
-        traverse(root->right,i+1,temp,num);
+        traverse(root->left,i+1,temp,num,max);
+        traverse(root->right,i+1,temp,num,max);
     }
 }
 
 
 double* averageOfLevels(struct TreeNode* root, int* returnSize) {
-    double * new;
-    *returnSize=0;
-    double *temp = calloc(100,sizeof(double));
-    double *num = calloc(100,sizeof(double));
-    traverse(root,0,temp,num);
-   
-    //traverseL(root,returnSize,temp);
-    //*returnSize=0;
-    //traverseR(root,returnSize,temp);
-    //new = malloc((*returnSize) *sizeof(double));
-    
-    //new[0]=*returnSize;
-    *returnSize=10;
-    return num;
+    double *temp = calloc(MAX_LAYER,sizeof(double));
+    double *num = calloc(MAX_LAYER,sizeof(double));
+    int max=0;
+    traverse(root,0,temp,num,&max);
+    *returnSize=max;
+    for(int i=0;i<*returnSize;i++){
+        if(num[i]!=0)
+        temp[i]/=num[i];
+    }
+    return temp;
 }
 
 

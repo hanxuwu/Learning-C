@@ -9,10 +9,6 @@
 # define left(tree) ((tree)->left)
 # define right(tree) ((tree)->right)
 
-typedef struct Node{
-    int data;
-    Tree left,right;
-}Node;
 
 // make a new node containing data
 
@@ -141,13 +137,13 @@ Tree TreeDelete(Tree t,Item it){
     return t;
 }
 
-Tree rotaterRight(Tree n1){
-    if (n1==NULL|| left(n1)==NULL) return n1;
-    Tree n2 = left(n1);
-    left(n1) = right(n2);
-    right(n2) = n1;
-    return n2;
-}
+// Tree rotaterRight(Tree n1){
+//     if (n1==NULL|| left(n1)==NULL) return n1;
+//     Tree n2 = left(n1);
+//     left(n1) = right(n2);
+//     right(n2) = n1;
+//     return n2;
+// }
 
 Tree insertAtRoot(Tree t, Item it) {
 
@@ -156,27 +152,27 @@ Tree insertAtRoot(Tree t, Item it) {
    return t;
 }
 
-Tree partition(Tree t, int i) {
-   if (t != NULL) {
-      assert(0 <= i && i < TreeNumNodes(t));
-      int m = TreeNumNodes(left(t));
-      if (i < m) {
-	 left(t) = partition(left(t), i);
-	 t = rotateRight(t);
-      } else if (i > m) {
-	 right(t) = partition(right(t), i-m-1);
-	 t = rotateLeft(t);
-      }
-   }
-   return t;
-}
+// Tree partition(Tree t, int i) {
+//    if (t != NULL) {
+//       assert(0 <= i && i < TreeNumNodes(t));
+//       int m = TreeNumNodes(left(t));
+//       if (i < m) {
+// 	 left(t) = partition(left(t), i);
+// 	 t = rotateRight(t);
+//       } else if (i > m) {
+// 	 right(t) = partition(right(t), i-m-1);
+// 	 t = rotateLeft(t);
+//       }
+//    }
+//    return t;
+// }
 
-Tree rebalance(Tree t) {
-   int n = TreeNumNodes(t);
-   if (n >= 3) {
-      t = partition(t, n/2);           // put node with median key at root
-      left(t) = rebalance(left(t));    // then rebalance each subtree
-      right(t) = rebalance(right(t));
-   }
-   return t;
-}
+// Tree rebalance(Tree t) {
+//    int n = TreeNumNodes(t);
+//    if (n >= 3) {
+//       t = partition(t, n/2);           // put node with median key at root
+//       left(t) = rebalance(left(t));    // then rebalance each subtree
+//       right(t) = rebalance(right(t));
+//    }
+//    return t;
+// }
