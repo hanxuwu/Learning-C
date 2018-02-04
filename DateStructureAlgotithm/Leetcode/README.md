@@ -52,6 +52,10 @@
 
 606.Construct String from Binary Tree(reference solution in Leetcode)  
 
+572.Subtree of Another Tree  (reference elegant solution in CSDN)  
+
+100.Same Tree (use similar solution as 572)
+
 
 
 
