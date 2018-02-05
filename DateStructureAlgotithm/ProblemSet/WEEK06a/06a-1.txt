@@ -1,0 +1,37 @@
+1.(Tree properties)
+a.Derive a formula for the minimum height of a binary search tree (BST) containing n nodes. Recall that the height is defined as the number of edges on a longest path from the root to a leaf. You might find it useful to start by considering the characteristics of a tree which has minimum height. The following diagram may help:
+
+
+b.In the Binary Search Tree ADT (BSTree.h, BSTree.c) from the lecture, implement the function:
+
+int TreeHeight(Tree t) { ... }
+to compute the height of a tree.
+
+
+Answer:
+a. A minimum height tree must be balanced. In a balanced tree,the 
+height of the two subtrees differs by at most one.In a perfectly balanced tree
+all leaves are at the same level. The single-node tree,and the two tree on the right 
+in the diagram above are perfectly balanced trees.A perfectly balanced tree of height h has
+n=2^0 +2^1 + ..+2^h = 2^h+1 -1 nodes . A perfectly balanced tree,therefore satisfies h = log2(n+1) -1.
+
+
+By inspection of the trees that are not perfectly balanced above,it is clear that as soon as
+an extra node is added  to a  perfectly balanced tree,the height will increase by 1.To maintain this height,
+all subsequent nodes must be added at the same level.The height will thus remain constant until we reach a new perfectly
+balanced state.It follows that for a tree with n nodes. the minimum height is h = log2(n+1) -1.
+
+
+b.int TreeHeight(Tree t){
+    if(t==NULL){
+        return -1;
+    }else{
+        int lheight = 1+TreeHeight(left(t));
+        int rheight = 1+TreeHeight(right(t));
+        if(lheight>rheight)
+            return lheight;
+        else
+            return rheight;
+    }
+}
+

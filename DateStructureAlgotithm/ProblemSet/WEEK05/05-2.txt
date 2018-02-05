@@ -1,0 +1,37 @@
+2.(MST – Kruskal's algorithm)
+Identify a minimum spanning tree in the following graph (without applying any of the algorithms from the lecture):
+
+What approach did you use in determining the MST?
+Show how Kruskal's algorithm would construct the MST for the above graph. How many edges do you have to consider?
+
+For a graph G=(V,E), what is the least number of edges that might need to be considered by Kruskal's algorithm, and what is the most number of edges? Add one vertex and edge to the above graph to force Kruskal's algorithm to the worst case.  
+
+
+b. Kruskal
+
+1-4
+6-7
+1-2
+3-4
+4-7
+7-5
+
+
+c. 
+For a graph G=(V,E), what is the least number of 
+edges that might need to be considered by Kruskal's algorithm, 
+and what is the most number of edges? 
+Add one vertex and edge to the above graph to force 
+Kruskal's algorithm to the worst case.  
+
+
+solution: 
+best case would be when first V-1 edges we consider are the lowest 
+cosr edges and none of these edges leads to a circle.
+
+worst case would be when we had to consider all E edges .If we added a vertex 8 to
+the above graph, and connected it to vertex 5,with dege cost 11(or any larger than all the other edge cost in graph)
+we would need to consider all edges to construct the MST.
+
+
+

@@ -1,0 +1,29 @@
+(Insertion at root)
+Consider an initially empty BST and the sequence of values
+
+1 2 3 4 5 6
+Show the tree resulting from inserting these values "at leaf". What is its height?
+Show the tree resulting from inserting these values "at root". What is its height?
+Show the tree resulting from alternating between at-leaf-insertion and at-root-insertion. What is its height?
+Complete the Binary Search Tree ADT (BSTree.h, BSTree.c) from the lecture by an implementation of the function:
+
+Tree insertAtRoot(Tree t, Item it) { ... }
+We have created a script that can automatically test your program. To run this test you can execute the dryrun program that corresponds to the problem set and week. It expects to find a file named BSTree.c in the current directory. You can use dryrun as follows:
+
+~cs9024/bin/dryrun prob06a
+Note: The dryrun script expects your program to include your implementation for Exercise 1.b.
+
+
+Tree insertAtRoot(Tree t,Item it){
+    if(t==NULL){
+        t=newNode(it);
+    }else if(it<data(t)){
+        left(t)= insertAtRoot(left(t),it);
+        t = rotateRight;
+    }else if(it>data(t)){
+        right(t) = insertAtRoot(right(t),it);
+        t =rotateLeft(t);
+    }
+    return t;
+
+}

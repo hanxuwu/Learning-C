@@ -1,0 +1,34 @@
+(Tree traversal)
+Consider the following tree and its nodes displayed in different output orderings:
+
+
+a.What kind of trees have the property that their infix output is the same as their prefix output? Are there any kinds of trees for which all four output orders will be the same?
+
+b.Design a recursive algorithm for prefix-, infix-, and postfix-order traversal of a binary search tree. Use pseudocode, and define a single function  TreeTraversal(tree,style), where style can be any of "NLR", "LNR" or "LRN".
+
+
+Answer:
+a. One obvious class of trees with this property is "right-deep" trees.Such trees have no left subtrees
+on any node eg.Ones that are built by inserting keys in ascending order.Essentially,they are linked-list.
+
+Empty trees and trees with just one node have all output orders the same.
+
+b.
+TreeTraversal(tree,style):
+    Input tree,style of traversal
+
+    if tree is not empty then
+        if style="NLR" then
+            visit(data(tree))
+        end if
+        TreeTraversal(left(tree),style)
+        if style = "LNR" then
+            visit(data(tree))
+        end if
+        TreeTraversal(right(tree),style)
+        if style = "LRN" then
+            visit(data(tree))
+        end if
+    end if 
+
+

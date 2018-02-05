@@ -17,3 +17,10 @@ week03-3 (Storage costs)
 
 week02-2 (Counting primitive operation)   
 
+
+5/2/2018 
+
+week05  
+
+week06a  
+

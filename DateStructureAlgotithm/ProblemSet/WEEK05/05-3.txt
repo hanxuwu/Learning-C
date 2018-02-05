@@ -1,0 +1,18 @@
+3.(MST – Prim's algorithm)
+Trace the execution of Prim's algorithm to compute a minimum spanning tree on the following graph:
+
+
+Choose a random vertex to start with. Draw the resulting minimum spanning tree.  
+
+
+Solution
+
+If we choose vertex 5:
+
+5:     (0,3,4)
+5,3:   (0,4)
+5,3,4: (0,7,6)
+5,3,4,7:(0,1,6)
+5,3,4,7,1(0,6)
+5,3,4,7,1,6(0)
+5,3,4,7,1,6,0,(2)
