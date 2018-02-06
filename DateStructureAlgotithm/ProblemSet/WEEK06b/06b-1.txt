@@ -1,0 +1,64 @@
+
+(Random numbers)
+a.A program that simulates the tosses of a coin is as follows:
+
+#define NTOSSES 20
+srandom(time(NULL));
+int i, count = 0;
+for (i=0; i<NTOSSES; i++) {
+   int toss = random() % 2;     // toss = 0 or 1
+   if (toss == 0) {
+      putchar('H');
+      count++;
+   } else {
+      putchar('T');
+   }
+}
+printf("\n%d heads, %d tails\n", count, NTOSSES-count);
+Sample output is:
+HHTTTTHHTTTHHTHHHHHH
+12 heads, 8 tails
+1.What would an analogous program to simulate the repeated 
+rolling of a die look like?
+
+2.What could be a sample output of this program?
+
+b.If you were given a string, say "hippopotamus",
+ and you had to select a random letter, how would you do this?
+
+c.If you have to pick a random number between 2 numbers
+, say i and j (inclusive), how would you do this? (Assume i<j.)
+
+Answer:
+a.There are 6 outcomes of dice rolling: the numbers 1 to 6.
+    * So we'll need a fixed array count[0...5] of length 6 to count how
+    many of each
+    * This needs to be initialised to all zeros
+
+    We roll the die NROLLS times,just like we tossed the coin.
+    * The outcome each time will be roll = 1+random()%6.
+    * this is a number between 1 and 6
+
+    We increment the count for this roll:
+    count[roll-1]++
+
+    We conclude by printing the contents of the count array.
+
+    The list of digits shows the sequence of the numbers that are rolled.
+    The count shows how often each number 1,2,.....6 appeared.
+
+b. We pick a random number between 0 and 11,(as there are 12 letters in the given string,
+and they will be stored incides 0 ...11),and then print that element in the character array.
+
+srandom(time(NULL));   
+char *string = "hippopotamus";
+int size = strlen(string);
+int ran = random() %size;
+printf("%c\n",string[ran]);
+
+c. We pick a random number between 0 and j-i ,and add that number to i.Note that 
+we must compute modulo(j-i+1) because the number j-i should be included.
+srandom(time(NULL));
+int ran = random()%(j-i+1);
+int num = i+ran;
+printf("%d\n",num);

@@ -1,0 +1,7 @@
+4.(2-3-4 trees)
+Show how a 2-3-4 tree would be constructed if the following values were inserted into an initially empty tree in the order given:
+
+1 2 3 4 5 8 6 7 9 10
+Once you have built the tree, count the number of comparisons needed to search for each of the following values in the tree:
+
+1  7  9  13

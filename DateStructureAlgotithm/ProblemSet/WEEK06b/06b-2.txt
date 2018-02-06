@@ -1,0 +1,16 @@
+
+2.(Splay trees)
+Show how a Splay tree would be constructed
+if the following values were inserted into an initially
+ empty tree in the order given:
+
+5 3 8 7 4
+Let t be your answer to question a., 
+and consider the following sequence of operations:
+
+SearchSplay(t,7);
+SearchSplay(t,3);
+SearchSplay(t,8);
+SearchSplay(t,6);
+Show the tree after each operation.
+

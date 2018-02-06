@@ -1,0 +1,6 @@
+3.(AVL trees)
+Answer the following question without the help of the treeLab program from the lecture.
+
+Show how an AVL tree would be constructed if the following values were inserted into an initially empty tree in the order given:
+
+12 10 8 6 4 2
