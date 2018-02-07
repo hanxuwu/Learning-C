@@ -1,0 +1,26 @@
+1.(String processing)
+Implement a C-function
+
+int *lastOccurrence(char *pattern, char *alphabet) { ... }
+that computes the last-occurrence function for the Boyer-Moore algorithm. The function should return a newly created dynamic array indexed by the numeric codes of the characters in the given alphabet (a non-empty string of ASCII-characters).
+
+Ensure that your function runs in O(m+s) time, where m is the size of the pattern and s the size of the alphabet.
+
+Hint: You can obtain the numeric code of a  char ch  through type conversion:  (int)ch.
+
+Answer:
+
+# define ASCII_SIZE 128
+
+int *lastOccurrenceFunction(char *pattern,char *alphabet){
+    int *L = malloc(ASCII_SIZE *sizeof(int));
+    assert(L!=NULL);
+
+    int i,s = strlen(alphabet);
+    for(i=0;i<s;i++)      // for all chars in the alphabet
+        L[(int)alphabet[i]]=-1; // ...initialise L[] to -1
+    int m = strlen(pattern);
+    for(i=0;i<m;i++)
+        L[(int)pattern[i]]=i;   //set L[]
+    return L;
+}

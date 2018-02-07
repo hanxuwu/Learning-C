@@ -1,0 +1,20 @@
+
+Boyer-Moore Algorithm:
+
+abacaabadcabacabaabb
+          abacab 13
+         abacab 7
+   abacab 6  
+  abacab 5
+ abacab 4
+abacab 1
+
+
+Knuth-Morris-Pratt Algorithm:
+abacaabadcabacabaabb
+          abacab 19
+         abacab 13
+     abacab 12
+    abacab 7
+abacab 6
+ 

@@ -1,0 +1,12 @@
+
+2.
+(Boyer-Moore algorithm)
+Use your answer to Exercise 1 to write a C-program that:
+
+prompts the user to input
+an alphabet (a string),
+a text (a string),
+a pattern (a string);
+computes and outputs the last-occurrence function for the pattern and alphabet;
+uses the Boyer-Moore algorithm to match the pattern against the text.
+An example of the program executing could be

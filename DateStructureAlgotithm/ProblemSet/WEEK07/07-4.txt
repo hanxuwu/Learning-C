@@ -1,0 +1,24 @@
+4.(Tries)
+a.Consider the following trie, where finishing nodes are shown in red:
+
+
+What words are encoded in this trie?
+
+b.If the following keys were inserted into an initially empty trie:
+
+jaws boots axe boo so jaw sore boot boon
+what would the final trie look like? Does the order of insertion matter?
+
+c.Answer question b. for a compressed trie.
+
+Answer:
+
+a.In alphabetical order: a ,air, an ,anon,car,crab,ma,man,mane,oh,orate.
+
+
+b.The trie after all keys are inserted:
+
+The order of insertion does not matter . the same trie will result from insertion of the same set of words.
+
+c.The compressed trie after all keys are inserted:
+

@@ -1,0 +1,30 @@
+// (Knuth-Morris-Pratt algorithm)
+// Develop, in pseudocode, a modified KMP algorithm that finds every occurrence of a pattern P in a text T. The algorithm should return a queue with the starting index of every substring of T equal to P.
+
+// Note that your algorithm should still run in O(n+m) time, and it should find every match, including those that "overlap".
+
+
+KMPMatchAll(T,P):
+   Input  text T of length n, pattern P of length m
+   Output queue with all starting indices of substrings of T equal to P
+ 
+   F=failureFunction(P)
+   i=0, j=0
+   Q=empty queue
+   while i<n do
+      if T[i]=P[j] then
+         if j=m-1 then
+            enqueue i-j into Q    // match found
+            i=i+1, j=F[m-1]       // continue to search for next match
+         else
+            i=i+1, j=j+1
+         end if
+      else
+         if j>0 then
+            j=F[j-1]
+         else
+            i=i+1
+         end if
+      end if
+   end while
+   return Q                       // if Q is empty, no match found
