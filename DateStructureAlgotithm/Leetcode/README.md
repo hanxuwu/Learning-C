@@ -56,6 +56,12 @@
 
 100.Same Tree (use similar solution as 572)
 
+10/2/2018  
+
+98.Validate Binary Search Tree (in order)  
+
+543.DiameterofBinaryTree
+
 
 
 
